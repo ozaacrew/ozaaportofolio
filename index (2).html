@@ -328,6 +328,61 @@ html[data-theme="light"]{--hk-bg1:#e6f1ea;--hk-bg2:#f2f2f3;--hk-far:#c3d9cb;--hk
  .proj:has(.shot:nth-child(even)){padding-bottom:clamp(1.2rem,3vw,2.2rem)}
  .proj-head .btn{width:100%;justify-content:center}
 }
+/* navigasi: floating pill */
+.nav,.nav.sc{top:.8rem;left:50%;right:auto;width:min(1180px,calc(100% - 2rem));transform:translateX(-50%);padding:.4rem .5rem .4rem .55rem;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--hero-bg) 62%,transparent);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 10px 34px -14px rgba(0,0,0,.55),inset 0 1px 0 color-mix(in srgb,var(--text) 10%,transparent);transition:background .3s,box-shadow .3s,top .3s}
+.nav.sc{background:color-mix(in srgb,var(--hero-bg) 82%,transparent);box-shadow:0 14px 40px -14px rgba(0,0,0,.7),inset 0 1px 0 color-mix(in srgb,var(--text) 10%,transparent)}
+.nav .brand{padding-right:.4rem}
+.nav .links{background:color-mix(in srgb,var(--text) 5%,transparent)}
+.nav .links a.on{background:var(--ink);color:var(--inv)}
+@media(max-width:1100px){.nav .brand span:not(.lg){max-width:46vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
+@media(max-width:820px){.nav,.nav.sc{top:.6rem;width:calc(100% - 1.2rem);padding:.3rem .4rem .3rem .4rem}.mmenu{clip-path:circle(0 at calc(100% - 2.2rem) 2rem)}.mmenu.open{clip-path:circle(150% at calc(100% - 2.2rem) 2rem)}}
+
+/* ===== v3: always dark, pill pinned top-left when shrunk ===== */
+.nav.mini{left:.9rem;right:auto;transform:none}
+.nav.hide,.nav.mini.hide{transform:translateY(calc(-100% - 1.5rem))}
+@media(max-width:820px){
+  .nav.mini{left:.7rem;right:auto;transform:none}
+  .nav.hide,.nav.mini.hide{transform:translateY(calc(-100% - 1.5rem))}
+}
+/* ===== v2: pill shrink-on-scroll + bottom tab bar ===== */
+.nav,.nav.sc{transition:background .3s,box-shadow .3s,top .5s var(--ease),width .5s var(--ease),padding .5s var(--ease),transform .5s var(--ease)}
+.nav.mini{top:.5rem;width:auto;padding:.3rem .4rem .3rem .4rem}
+.nav.mini .brand{gap:0}
+.nav.mini .brand .lg{width:2.1rem;height:2.1rem}
+.nav .brand #brandName{display:inline-block;max-width:16rem;opacity:1;overflow:hidden;white-space:nowrap;transition:max-width .45s var(--ease),opacity .3s}
+.nav.mini .brand #brandName{max-width:0;opacity:0}
+.nav.mini .links a{padding:.4rem .75rem;font-size:.85rem}
+.nav.mini .cta{display:none}
+.nav .links a{transition:padding .45s var(--ease),font-size .3s,background .25s,color .25s}
+
+.tabs{display:grid;position:fixed;z-index:64;left:50%;bottom:calc(.6rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:min(460px,calc(100% - 1.2rem));padding:.3rem;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--hero-bg) 70%,transparent);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 10px 34px -14px rgba(0,0,0,.55),inset 0 1px 0 color-mix(in srgb,var(--text) 10%,transparent);grid-template-columns:repeat(6,minmax(0,1fr));align-items:stretch}
+.tabs a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.12rem;min-width:0;padding:.4rem 0;border-radius:999px;color:var(--muted);text-decoration:none;font-size:.6rem;font-weight:600;letter-spacing:.01em;transition:background .3s,color .3s}
+.tabs a:hover{color:var(--text)}
+.tabs a.on{background:var(--ink);color:var(--inv)}
+.tabs svg{width:1.1rem;height:1.1rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.tabs a span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+@media(max-width:820px){
+  body{padding-bottom:calc(4.8rem + env(safe-area-inset-bottom,0px))}
+  .tabs{display:grid}
+  .burger{display:none}
+  .nav.mini{width:auto;padding:.25rem .3rem}
+  .nav.mini .brand{padding-right:0}
+  .nav .brand #brandName{max-width:10rem}
+}
+.dock-t{display:none}
+@media(min-width:821px){
+  .tabs{display:grid;bottom:1.3rem;width:min(680px,calc(100% - 2rem));padding:.35rem;opacity:0;visibility:hidden;transform:translate(-50%,24px);transition:opacity .35s var(--ease),transform .45s var(--ease),visibility 0s .45s;box-shadow:0 18px 50px -18px rgba(0,0,0,.7),inset 0 1px 0 color-mix(in srgb,var(--text) 10%,transparent)}
+  .tabs.open{opacity:1;visibility:visible;transform:translate(-50%,0);transition:opacity .35s var(--ease),transform .45s var(--ease),visibility 0s}
+  .tabs a{flex-direction:row;gap:.5rem;padding:.7rem .5rem;font-size:.8rem}
+  .tabs svg{width:1.15rem;height:1.15rem}
+  .tabs a:hover{background:var(--card)}
+  .tabs a.on:hover{background:var(--ink);color:var(--inv)}
+  .nav.mini .links{display:none}
+  .nav.mini .dock-t{display:grid}
+  .nav.mini .nav-r{gap:0}
+}
+@media(prefers-reduced-motion:reduce){.nav,.nav.sc,.nav .brand #brandName,.nav .links a{transition:none!important}}
 </style>
 </head>
 <body>
@@ -342,11 +397,19 @@ html[data-theme="light"]{--hk-bg1:#e6f1ea;--hk-bg2:#f2f2f3;--hk-far:#c3d9cb;--hk
     <a href="#tentang">Tentang</a><a href="#pendidikan">Riwayat Pendidikan</a><a href="#pendakian">Pendakian</a><a href="#sertifikat">Sertifikat</a><a href="#proyek">Proyek</a><a href="#kontak">Kontak</a>
   </nav>
   <div class="nav-r">
-    <button class="ib" id="theme" aria-label="Ganti tema"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
     <a class="cta" href="#kontak">Hubungi saya</a>
+    <button class="ib dock-t" id="dockT" aria-label="Buka navigasi" aria-expanded="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg></button>
     <button class="ib burger" id="burger" aria-label="Menu"><i></i><i></i></button>
   </div>
 </header>
+<nav class="tabs" id="tabs" aria-label="Navigasi bawah">
+  <a href="#tentang"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span>Tentang</span></a>
+  <a href="#pendidikan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg><span>Riwayat</span></a>
+  <a href="#pendakian"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20l6-10 4 6 2-3 6 7z"/></svg><span>Pendakian</span></a>
+  <a href="#sertifikat"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg><span>Sertifikat</span></a>
+  <a href="#proyek"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg><span>Proyek</span></a>
+  <a href="#kontak"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span>Kontak</span></a>
+</nav>
 <div class="mmenu" id="mmenu">
   <a style="--i:0" href="#tentang">Tentang</a><a style="--i:1" href="#pendidikan">Riwayat Pendidikan</a><a style="--i:2" href="#pendakian">Pendakian</a><a style="--i:3" href="#sertifikat">Sertifikat</a><a style="--i:4" href="#proyek">Proyek</a><a style="--i:5" href="#kontak">Kontak</a>
 </div>
@@ -591,12 +654,7 @@ $('#form').addEventListener('submit',e=>{
 
 /* ---- tema ---- */
 const root=document.documentElement;
-try{const t=localStorage.getItem('theme'); if(t) root.dataset.theme=t}catch(_){}
-$('#theme').onclick=()=>{
-  const n=root.dataset.theme==='dark'?'light':'dark';
-  const go=()=>{root.dataset.theme=n; try{localStorage.setItem('theme',n)}catch(_){}; sizeDots()};
-  document.startViewTransition&&!reduce?document.startViewTransition(go):go();
-};
+root.dataset.theme='dark';
 
 /* ---- menu mobile ---- */
 const burger=$('#burger'),mm=$('#mmenu');
@@ -606,13 +664,28 @@ $$('#mmenu a').forEach(a=>a.onclick=closeMenu);
 
 /* ---- scroll: progress, nav, link aktif, reveal ---- */
 const prog=$('#progress'),nav=$('#nav');
+let lastY=0;const mobileMQ=matchMedia('(max-width:820px)');
+const tabsEl=$('#tabs'),dockT=$('#dockT');
+function closeDock(){tabsEl.classList.remove('open');dockT.setAttribute('aria-expanded','false')}
 function onScroll(){
   const h=document.documentElement; const max=h.scrollHeight-innerHeight;
   prog.style.transform=`scaleX(${max>0?scrollY/max:0})`;
-  nav.classList.toggle('sc',scrollY>20);
+  const y=scrollY, dy=y-lastY; lastY=y;
+  nav.classList.toggle('sc',y>20);
+  nav.classList.toggle('mini',y>140);
+  if(!mobileMQ.matches){
+    nav.classList.remove('hide');
+    if(!nav.classList.contains('mini')) closeDock();
+  } else if(y<80) nav.classList.remove('hide');
+  else if(dy>6) nav.classList.add('hide');
+  else if(dy<-6) nav.classList.remove('hide');
 }
 addEventListener('scroll',onScroll,{passive:true});onScroll();
-const links=$$('#links a');
+const links=$$('#links a,#tabs a');
+dockT.onclick=e=>{e.stopPropagation();const o=tabsEl.classList.toggle('open');dockT.setAttribute('aria-expanded',String(o))};
+tabsEl.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeDock));
+document.addEventListener('click',e=>{if(tabsEl.classList.contains('open')&&!tabsEl.contains(e.target))closeDock()});
+addEventListener('keydown',e=>{if(e.key==='Escape')closeDock()});
 const secObs=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting) links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));
 }),{rootMargin:'-45% 0px -50% 0px'});
